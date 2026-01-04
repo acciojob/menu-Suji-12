@@ -1,68 +1,38 @@
 import React, { useState } from "react";
-import "../styles/App.css";
 
-const menuItems = [
-  {
-    id: 1,
-    name: "Buttermilk Pancakes",
-    category: "breakfast",
-    price: "$15.99",
-    testId: "menu-item-breakfast",
-  },
-  {
-    id: 2,
-    name: "Diner Double",
-    category: "lunch",
-    price: "$13.99",
-    testId: "menu-item-lunch",
-  },
-  {
-    id: 3,
-    name: "Godzilla Milkshake",
-    category: "shakes",
-    price: "$6.99",
-    testId: "menu-item-shakes",
-  },
+const items = [
+  { id: 1, name: "Pancakes", category: "breakfast", testId: "menu-item-breakfast" },
+  { id: 2, name: "Burger", category: "lunch", testId: "menu-item-lunch" },
+  { id: 3, name: "Milkshake", category: "shakes", testId: "menu-item-shakes" },
 ];
 
 const App = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [category, setCategory] = useState("");
 
   const filteredItems =
-    selectedCategory === ""
-      ? menuItems
-      : menuItems.filter(
-          (item) => item.category === selectedCategory
-        );
+    category === "" ? items : items.filter(i => i.category === category);
 
   return (
     <div id="main">
       {/* Do not remove the main div */}
 
-      <h2>Our Menu</h2>
-
-      {/* Filter Buttons */}
-      <button id="filter-btn-1" onClick={() => setSelectedCategory("breakfast")}>
+      <button id="filter-btn-1" onClick={() => setCategory("breakfast")}>
         Breakfast
       </button>
 
-      <button id="filter-btn-2" onClick={() => setSelectedCategory("lunch")}>
+      <button id="filter-btn-2" onClick={() => setCategory("lunch")}>
         Lunch
       </button>
 
-      <button id="filter-btn-3" onClick={() => setSelectedCategory("shakes")}>
+      <button id="filter-btn-3" onClick={() => setCategory("shakes")}>
         Shakes
       </button>
 
-      {/* Menu Items */}
-      <div>
-        {filteredItems.map((item) => (
-          <div key={item.id} data-test-id={item.testId}>
-            <h4>{item.name}</h4>
-            <p>{item.price}</p>
-          </div>
-        ))}
-      </div>
+      {filteredItems.map(item => (
+        <div key={item.id} data-test-id={item.testId}>
+          {item.name}
+        </div>
+      ))}
     </div>
   );
 };
